@@ -1,6 +1,6 @@
 # Route Planning Project
 
-This repo contains the starter code for the Route Planning project.
+This repo contains my finished submission for the Udacity A*Search OpenStreetMap map navigator project
 
 <img src="map.png" width="600" height="450" />
 
