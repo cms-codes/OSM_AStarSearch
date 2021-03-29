@@ -1,6 +1,7 @@
 # Route Planning Project
 
-This repo contains my finished submission for the Udacity A*Search OpenStreetMap map navigator project
+This repo contains my OpenStreetMap map navigator project, implementing an A* search algorithm
+Completed March 2021 for the Udacity C++ nanodegree
 
 <img src="map.png" width="600" height="450" />
 
@@ -8,11 +9,11 @@ This repo contains my finished submission for the Udacity A*Search OpenStreetMap
 
 When cloning this project, be sure to use the `--recurse-submodules` flag. Using HTTPS:
 ```
-git clone https://github.com/udacity/CppND-Route-Planning-Project.git --recurse-submodules
+git clone https://github.com/cms-codes/OSM_AStarSearch.git --recurse-submodules
 ```
 or with SSH:
 ```
-git clone git@github.com:udacity/CppND-Route-Planning-Project.git --recurse-submodules
+git clone git@github.com:cms-codes/OSM_AStarSearch.git --recurse-submodules
 ```
 
 ## Dependencies for Running Locally
