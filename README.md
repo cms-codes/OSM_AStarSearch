@@ -1,6 +1,6 @@
 # Route Planning Project
 
-This repo contains my OpenStreetMap map navigator project, implementing an A* search algorithm
+This repo contains my OpenStreetMap map navigator project, implementing an A* search algorithm<br />
 Completed March 2021 for the Udacity C++ nanodegree
 
 <img src="map.png" width="600" height="450" />
