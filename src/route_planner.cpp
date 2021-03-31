@@ -2,7 +2,8 @@
 #include <algorithm>
 #include <limits>
 
-RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, float end_x, float end_y): m_Model(model) {
+RoutePlanner::RoutePlanner(RouteModel &model, float start_x, float start_y, float end_x, float end_y): m_Model(model) 
+{
     // Convert inputs to percentage:
     start_x *= 0.01;
     start_y *= 0.01;
@@ -19,7 +20,8 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node)
     return node->distance(*this->end_node);
 }
 
-void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
+void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) 
+{
     float f_value = 0.0f;
     current_node->FindNeighbors();
 
@@ -57,7 +59,8 @@ RouteModel::Node *RoutePlanner::NextNode()
     return shortest;
 }
 
-std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
+std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) 
+{
     // Create path_found vector
     distance = 0.0f;
     std::vector<RouteModel::Node> path_found;
@@ -81,7 +84,8 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
 
 }
 
-void RoutePlanner::AStarSearch() {
+void RoutePlanner::AStarSearch() 
+{
     RouteModel::Node *current_node = nullptr;
 
     current_node = this->start_node;
