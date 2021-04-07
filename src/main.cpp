@@ -1,6 +1,7 @@
 #include <optional>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <string>
 #include <io2d.h>
@@ -9,6 +10,81 @@
 #include "route_planner.h"
 
 using namespace std::experimental;
+
+float getInput(std::string prompt, float min_input, float max_input);
+
+std::vector<float> getMapCoordinates();
+
+bool badRange(float user_input, float min_input, float max_input);
+
+std::vector<float> getMapCoordinates()
+{
+    float start_x{};
+    float start_y{};
+    float end_x{};
+    float end_y{};
+
+    std::vector<float> input;
+
+    std::cout << "\nEnter start x and y coordinates (0-100):\n";
+    start_x = getInput("x: ", 0, 100);
+    input.emplace_back(start_x);
+    start_y = getInput("y: ", 0, 100);
+    input.emplace_back(start_y);
+
+    std::cout << "Enter destination x and y coordinates (0-100):\n";
+    end_x = getInput("x: ", 0, 100);
+    input.emplace_back(end_x);
+    end_y = getInput("y: ", 0, 100);
+    input.emplace_back(end_y);
+
+    return input;
+}
+
+float getInput(std::string prompt, float min_input, float max_input)
+{
+    std::string input_str = "";
+    float input_float = 0.0f;
+    std::size_t index = 0;
+
+    do
+    {
+        input_str = "";
+        input_float = 0.0f;
+        index = 0;
+        do
+        {
+            std::cout << prompt;
+            std::getline(std::cin, input_str);
+            std::stringstream s(input_str);
+            if (sizeof(s) > 0)
+            {
+                try
+                {
+                    input_float = std::stof(input_str, &index);
+                }
+                catch (...)
+                {
+                    index = -1;
+                }
+            }
+            
+        }
+        while ( index != input_str.length() );
+
+    }
+    while (badRange(input_float, min_input, max_input));
+
+    return input_float;
+}
+
+bool badRange(float user_input, float min_input, float max_input)
+{
+    if ( (std::isless(user_input, min_input) ) || (std::isgreater(user_input, max_input) ) )
+        return true;
+    else
+        return false;
+}
 
 static std::optional<std::vector<std::byte>> ReadFile(const std::string &path)
 {   
@@ -52,31 +128,16 @@ int main(int argc, const char **argv)
             osm_data = std::move(*data);
     }
     
-    // TODO 1: Declare floats `start_x`, `start_y`, `end_x`, and `end_y` and get
-    // user input for these values using std::cin. Pass the user input to the
-    // RoutePlanner object below in place of 10, 10, 90, 90.
+    // Collect user input.
+    std::vector<float> user_input;
 
-    float start_x;
-    float start_y;
-    float end_x;
-    float end_y;
-
-    std::cout << "Enter starting location x coordinate: ";
-    std::cin >> start_x;
-    std::cout << "Enter starting location y coordinate: ";
-    std::cin >> start_y;
-
-    std::cout << "Enter finish location x coordinate: ";
-    std::cin >> end_x;
-    std::cout << "Enter finish location y coordinate: ";
-    std::cin >> end_y;
-
+    user_input = getMapCoordinates();
 
     // Build Model.
     RouteModel model{osm_data};
 
     // Create RoutePlanner object and perform A* search.
-    RoutePlanner route_planner{model, start_x, start_y, end_x, end_y};
+    RoutePlanner route_planner{model, user_input[0], user_input[1], user_input[2], user_input[3]};
     route_planner.AStarSearch();
 
     std::cout << "Distance: " << route_planner.GetDistance() << " meters. \n";
