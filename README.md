@@ -1,5 +1,7 @@
 # Route Planning Project
 
+### Using a Manhattan heuristic, this program creates a linked list of OSM nodes as the shortest path between a set of user-supplied coordinates. Standard Library for sorting. Provides the distance in meters as well as a rendered map.
+
 <img src="map.png" width="600" height="450" />
 
 ## Cloning
